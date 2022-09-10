@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useEffect, useCallback } from "react";
+import styled from "styled-components";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const getCurrentLocation = useCallback(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            console.log(lat, lon);
+        });
+    }, []);
+
+    useEffect(() => {
+        getCurrentLocation();
+    }, [getCurrentLocation]);
+
+    return <Container>aa</Container>;
 }
+const Container = styled.main`
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+`;
 
 export default App;
