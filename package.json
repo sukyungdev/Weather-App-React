@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -20,9 +22,27 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+      "airbnb",
+      "prettier"
+    ],
+    "rules": {
+      "react/prefer-stateless-function": 0,
+      "react/jsx-filename-extension": 0,
+      "react/jsx-one-expression-per-line": 0,
+      "react/react-in-jsx-scope": 0,
+      "react/jsx-uses-react": 0,
+      "no-console": "off",
+      "no-use-before-define": [
+        "error",
+        {
+          "functions": false,
+          "variables": false
+        }
+      ]
+    },
+    "env": {
+      "browser": true
+    }
   },
   "browserslist": {
     "production": [
