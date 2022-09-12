@@ -1,8 +1,10 @@
 import './App.css';
-import { useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import WeatherInfo from './Component/WeatherInfo';
 
 function App() {
+  const [weather, setWeather] = useState(null);
   const getCurrentLocation = useCallback(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const lat = position.coords.latitude;
@@ -13,17 +15,22 @@ function App() {
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
     console.log(lat, lon);
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=26838e13d923034d329d7992ddfe3746`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
+    setWeather(data);
+    // console.log(weather);
   };
 
   useEffect(() => {
     getCurrentLocation();
   }, [getCurrentLocation]);
 
-  return <Container />;
+  return (
+    <Container>
+      <WeatherInfo weather={weather} />
+    </Container>
+  );
 }
 const Container = styled.main`
   width: 100%;
