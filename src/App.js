@@ -2,9 +2,15 @@ import './App.css';
 import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import WeatherInfo from './Component/WeatherInfo';
+import ForecastInfo from './Component/ForecastInfo';
 
 function App() {
+  // useState
   const [weather, setWeather] = useState(null);
+  const [forecast, setForecast] = useState(null);
+
+  // function
+
   const getCurrentLocation = useCallback(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const lat = position.coords.latitude;
@@ -24,11 +30,10 @@ function App() {
   };
 
   const getWeatherForecast = async (lat, lon) => {
-    console.log(lat, lon);
     const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
     const response = await fetch(url);
     const data = await response.json();
-    console.log('Forecast', data);
+    setForecast(data);
   };
 
   useEffect(() => {
@@ -38,6 +43,7 @@ function App() {
   return (
     <Container>
       <WeatherInfo weather={weather} />
+      <ForecastInfo forecast={forecast} />
     </Container>
   );
 }
