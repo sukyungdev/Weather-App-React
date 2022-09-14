@@ -1,8 +1,7 @@
-/* eslint-disable react/function-component-definition */
-/* eslint-disable react/prop-types */
+/* eslint-disable */
 
 const WeatherInfo = ({ weather }) => {
-  console.log('weather?', weather);
+  // console.log('weather?', weather);
 
   return (
     <div>

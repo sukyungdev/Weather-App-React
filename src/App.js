@@ -8,7 +8,6 @@ function App() {
   // useState
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
-
   // function
 
   const getCurrentLocation = useCallback(() => {
@@ -26,7 +25,8 @@ function App() {
     const response = await fetch(url);
     const data = await response.json();
     setWeather(data);
-    // console.log(weather);
+
+    // setWeather(data);
   };
 
   const getWeatherForecast = async (lat, lon) => {
