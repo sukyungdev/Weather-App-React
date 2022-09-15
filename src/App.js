@@ -3,13 +3,14 @@ import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import WeatherInfo from './Component/WeatherInfo';
 import ForecastInfo from './Component/ForecastInfo';
+import SearchCity from './Component/SearchCity';
 
 function App() {
   // useState
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
+  const [city, setCity] = useState('');
   // function
-
   const getCurrentLocation = useCallback(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const lat = position.coords.latitude;
@@ -44,12 +45,18 @@ function App() {
     <Container>
       <WeatherInfo weather={weather} />
       <ForecastInfo forecast={forecast} />
+      <SearchCity setCity={setCity} />
     </Container>
   );
 }
 const Container = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
+  background: url('https://images.unsplash.com/photo-1592376830275-74b25b63141a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')
+    no-repeat center center;
   background-size: cover;
 `;
 

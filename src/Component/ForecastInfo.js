@@ -2,45 +2,51 @@
 import styled from 'styled-components';
 
 const ForecastInfo = ({ forecast }) => {
-  if (forecast) {
-    // console.log(forecast);
-    //object로 데이터 정리해서 보내면 좋을듯 하다.
-    console.log(forecast.list[0].weather[0].main);
-  }
+  console.log(forecast ? forecast : '');
 
-  const render = () => {
-    const result = [];
-    for (let i = 2; i < 7; i++) {
-      result.push(
-        <div key={i}>
-          <Date>{forecast && forecast.list[i].dt_txt}</Date>
-          <Info>{forecast && forecast.list[i].weather[0].main}</Info>
-        </div>,
-      );
-    }
-    return result;
-  };
+  // const render = () => {
+  //   const result = [];
+  //   for (let i = 2; i < 7; i++) {
+  //     result.push(
+  //       <div key={i}>
+  //         <Date>{forecast && forecast.list[i].dt_txt.substring(5, 16)}</Date>
+  //         <Info>{forecast && forecast.list[i].weather[0].description}</Info>
+  //       </div>,
+  //     );
+  //   }
+  //   return result;
+  // };
 
-  for (let i = 0; i < 5; i++) {}
   return (
-    <div>
+    <Container>
       <Title>ForecastInfo</Title>
-      <p>{forecast && forecast.cod}</p>
-      {render()}
-    </div>
+      {/* {render()} */}
+    </Container>
   );
 };
 
+const Container = styled.div`
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: center;
+  padding: 2em;
+  margin: 1em;
+`;
 const Title = styled.h1`
-  color: aqua;
+  font-size: 30px;
+  margin-bottom: 1em;
 `;
 
 const Date = styled.p`
-  color: blue;
+  font-size: 24px;
+  margin-bottom: 0.1em;
+  font-weight: normal;
 `;
 
-const Info = styled.p`
-  color: skyblue;
-`;
+const Info = styled.p``;
 
 export default ForecastInfo;
