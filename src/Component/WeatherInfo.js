@@ -17,22 +17,17 @@ const WeatherInfo = ({ weather }) => {
   );
 };
 
-const Container = styled.div`
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  text-align: center;
-  padding: 2em;
-  margin: 1em;
+const Container = styled.section`
+  @media screen and (max-width: 768px) {
+    /* width: 90%; */
+    margin-bottom: 1.5em;
+  }
 `;
 const Title = styled.h1`
-  font-size: 30px;
-  margin-bottom: 1em;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
 `;
-const CityName = styled(Title)`
+const CityName = styled.h1`
   margin-bottom: 0.2em;
 `;
 const CurrentWeather = styled.h2`

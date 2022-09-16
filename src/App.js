@@ -1,6 +1,7 @@
 import './App.css';
 import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import GlobalStyle from './style/global';
 import WeatherInfo from './Component/WeatherInfo';
 import ForecastInfo from './Component/ForecastInfo';
 import SearchCity from './Component/SearchCity';
@@ -10,6 +11,7 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [city, setCity] = useState('');
+
   // function
   const getCurrentLocation = useCallback(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -21,13 +23,10 @@ function App() {
   }, []);
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
-    // console.log(lat, lon);
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
     const response = await fetch(url);
     const data = await response.json();
     setWeather(data);
-
-    // setWeather(data);
   };
 
   const getWeatherForecast = async (lat, lon) => {
@@ -44,28 +43,42 @@ function App() {
     setWeather(data);
   };
 
+  const getWeatherForecastByCity = async () => {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    setForecast(data);
+  };
+
+  // useEffect
   useEffect(() => {
     if (!city) {
       getCurrentLocation();
     } else {
       getCurrentWeatherByCity();
+      getWeatherForecastByCity();
     }
   }, [getCurrentLocation, city]);
 
-  // useEffect(() => {
-  //   console.log('city?', city);
-
-  // }, [city]);
-
   return (
-    <Container>
+    <MainContainer>
+      <GlobalStyle />
       <WeatherInfo weather={weather} />
       <ForecastInfo forecast={forecast} />
-      <SearchCity setCity={setCity} getCurrentLocation={getCurrentLocation} />
-    </Container>
+      <SearchCity
+        setCity={setCity}
+        getCurrentLocation={getCurrentLocation}
+        getWeatherForecastByCity={getWeatherForecastByCity}
+      />
+    </MainContainer>
   );
 }
-const Container = styled.main`
+const MainContainer = styled.main`
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    /* padding: 1em 0; */
+  }
   display: flex;
   justify-content: center;
   align-items: center;
