@@ -37,15 +37,31 @@ function App() {
     setForecast(data);
   };
 
+  const getCurrentWeatherByCity = async () => {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
+    const response = await fetch(url);
+    const data = await response.json();
+    setWeather(data);
+  };
+
   useEffect(() => {
-    getCurrentLocation();
-  }, [getCurrentLocation]);
+    if (!city) {
+      getCurrentLocation();
+    } else {
+      getCurrentWeatherByCity();
+    }
+  }, [getCurrentLocation, city]);
+
+  // useEffect(() => {
+  //   console.log('city?', city);
+
+  // }, [city]);
 
   return (
     <Container>
       <WeatherInfo weather={weather} />
       <ForecastInfo forecast={forecast} />
-      <SearchCity setCity={setCity} />
+      <SearchCity setCity={setCity} getCurrentLocation={getCurrentLocation} />
     </Container>
   );
 }
