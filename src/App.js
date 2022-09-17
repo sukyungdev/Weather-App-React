@@ -1,7 +1,9 @@
 import './App.css';
 import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import ClipLoader from 'react-spinners/ClipLoader';
 import GlobalStyle from './style/global';
+
 import WeatherInfo from './Component/WeatherInfo';
 import ForecastInfo from './Component/ForecastInfo';
 import SearchCity from './Component/SearchCity';
@@ -11,6 +13,7 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [city, setCity] = useState('');
+  const [loading, setLoading] = useState(true);
 
   // function
   const getCurrentLocation = useCallback(() => {
@@ -24,31 +27,38 @@ function App() {
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
+    setLoading(true);
     const response = await fetch(url);
     const data = await response.json();
     setWeather(data);
+    setLoading(false);
   };
 
   const getWeatherForecast = async (lat, lon) => {
     const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
+    setLoading(true);
     const response = await fetch(url);
     const data = await response.json();
     setForecast(data);
+    setLoading(false);
   };
 
   const getCurrentWeatherByCity = async () => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
+    setLoading(true);
     const response = await fetch(url);
     const data = await response.json();
     setWeather(data);
+    setLoading(false);
   };
 
   const getWeatherForecastByCity = async () => {
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
+    setLoading(true);
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     setForecast(data);
+    setLoading(false);
   };
 
   // useEffect
@@ -63,16 +73,23 @@ function App() {
 
   return (
     <MainContainer>
-      <Container>
-        <GlobalStyle />
-        <WeatherInfo weather={weather} />
-        <ForecastInfo forecast={forecast} />
-        <SearchCity
-          setCity={setCity}
-          getCurrentLocation={getCurrentLocation}
-          getWeatherForecastByCity={getWeatherForecastByCity}
-        />
-      </Container>
+      {loading ? (
+        <Container>
+          <ClipLoader color="#FFFFFF" loading={loading} size={150} />
+        </Container>
+      ) : (
+        <Container>
+          <GlobalStyle />
+
+          <WeatherInfo weather={weather} />
+          <ForecastInfo forecast={forecast} />
+          <SearchCity
+            setCity={setCity}
+            getCurrentLocation={getCurrentLocation}
+            getWeatherForecastByCity={getWeatherForecastByCity}
+          />
+        </Container>
+      )}
     </MainContainer>
   );
 }
