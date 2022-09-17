@@ -63,25 +63,20 @@ function App() {
 
   return (
     <MainContainer>
-      <GlobalStyle />
-      <WeatherInfo weather={weather} />
-      <ForecastInfo forecast={forecast} />
-      <SearchCity
-        setCity={setCity}
-        getCurrentLocation={getCurrentLocation}
-        getWeatherForecastByCity={getWeatherForecastByCity}
-      />
+      <Container>
+        <GlobalStyle />
+        <WeatherInfo weather={weather} />
+        <ForecastInfo forecast={forecast} />
+        <SearchCity
+          setCity={setCity}
+          getCurrentLocation={getCurrentLocation}
+          getWeatherForecastByCity={getWeatherForecastByCity}
+        />
+      </Container>
     </MainContainer>
   );
 }
 const MainContainer = styled.main`
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    /* padding: 1em 0; */
-  }
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100vh;
   background: url('https://images.unsplash.com/photo-1592376830275-74b25b63141a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')
@@ -89,4 +84,17 @@ const MainContainer = styled.main`
   background-size: cover;
 `;
 
+const Container = styled.div`
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
 export default App;

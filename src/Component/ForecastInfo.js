@@ -23,7 +23,12 @@ const ForecastInfo = ({ forecast }) => {
   );
 };
 
-const Container = styled.section``;
+const Container = styled.section`
+  @media screen and (min-width: 768px) {
+    width: 30%;
+    min-width: 260px;
+  }
+`;
 const InfoBox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -34,17 +39,19 @@ const InfoBox = styled.div`
 const Title = styled.h1`
   font-size: 1.2em;
   margin-bottom: 0.5em;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 1em;
+  }
 `;
 
 const Date = styled.p`
-  /* display: inline-block; */
+  opacity: 0.7;
   font-size: 1.25em;
   margin-bottom: 0.1em;
   font-weight: normal;
 `;
 
 const Info = styled.p`
-  /* display: inline-block; */
   font-size: 1.25em;
 `;
 

@@ -25,7 +25,6 @@ button,
 input {
   border: none;
   border-radius: 3px;
-  padding: 5px 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 1px 3px 8px;
 }
 
@@ -44,14 +43,6 @@ section {
     width: 80%;
   }
 }
-
-section ~ section {
-  margin-bottom: 1.5em;
-}
-
-
-
-
 `;
 
 export default GlobalStyle;

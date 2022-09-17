@@ -2,6 +2,7 @@
 import React from 'react';
 import { useRef } from 'react';
 import styled from 'styled-components';
+import { FcSearch } from 'react-icons/fc';
 
 const SearchCity = ({ setCity, getCurrentLocation, getWeatherForecastByCity }) => {
   const inputRef = useRef('');
@@ -9,8 +10,7 @@ const SearchCity = ({ setCity, getCurrentLocation, getWeatherForecastByCity }) =
     e.preventDefault();
     console.log(inputRef.current.value);
     setCity(inputRef.current.value);
-    // getWeatherForecastByCity();
-    // inputRef.current.value = '';
+    inputRef.current.value = '';
   };
 
   const currentLocation = (e) => {
@@ -20,32 +20,56 @@ const SearchCity = ({ setCity, getCurrentLocation, getWeatherForecastByCity }) =
 
   return (
     <Container>
-      <form>
+      <Form>
         <Input type="text" ref={inputRef} placeholder="City Name" />
-        <button type="submit" onClick={(e) => search(e)}>
-          Search
-        </button>
-      </form>
-      <button type="submit" onClick={(e) => currentLocation(e)}>
+        <SearchBtn type="submit" onClick={(e) => search(e)}>
+          <FcSearch size={20} />
+        </SearchBtn>
+      </Form>
+      <CurrentBtn type="submit" onClick={(e) => currentLocation(e)}>
         Current location
-      </button>
+      </CurrentBtn>
     </Container>
   );
 };
 
 const Container = styled.section`
-  /* position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.5em; */
+  @media screen and (max-width: 768px) {
+    width: 80%;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: translateX(0);
+  }
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  max-width: 540px;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+const Form = styled.form`
+  display: flex;
+  justify-content: center;
   align-items: center;
 `;
 
 const Input = styled.input`
   margin-right: 5px;
+  padding: 8px 10px;
+`;
+
+const SearchBtn = styled.button`
+  padding: 4px 5px;
+`;
+
+const CurrentBtn = styled.button`
+  padding: 7px 5px;
+  font-size: 1em;
 `;
 
 export default SearchCity;
