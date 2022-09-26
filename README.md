@@ -3,13 +3,18 @@
 Demo  
 [https://weather-glass.vercel.app/](https://weather-glass.vercel.app/)
 
-## skills
+## Skills
 
 -   React
     - hooks
     - react-icons
 -   Styled-component
 
+## Features
+
+- current location(city) weather 
+- current location(city) forecast
+- search city
 ## Deploy
 
 I used netlify to vercel.  
