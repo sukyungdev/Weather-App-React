@@ -8,6 +8,9 @@ import WeatherInfo from './Component/WeatherInfo';
 import ForecastInfo from './Component/ForecastInfo';
 import SearchCity from './Component/SearchCity';
 
+// API_KEY
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 function App() {
   // useState
   const [weather, setWeather] = useState(null);
@@ -26,7 +29,7 @@ function App() {
   }, []);
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
     setLoading(true);
     const response = await fetch(url);
     const data = await response.json();
@@ -35,7 +38,7 @@ function App() {
   };
 
   const getWeatherForecast = async (lat, lon) => {
-    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
     setLoading(true);
     const response = await fetch(url);
     const data = await response.json();
@@ -44,7 +47,7 @@ function App() {
   };
 
   const getCurrentWeatherByCity = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
     setLoading(true);
     const response = await fetch(url);
     const data = await response.json();
@@ -53,7 +56,7 @@ function App() {
   };
 
   const getWeatherForecastByCity = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=26838e13d923034d329d7992ddfe3746&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
     setLoading(true);
     const response = await fetch(url);
     const data = await response.json();
