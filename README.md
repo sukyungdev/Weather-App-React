@@ -1,7 +1,7 @@
 # Weather-Glass
 
 Demo  
-[https://weather-glass.vercel.app/](https://weather-glass.vercel.app/)
+[https://weather-glass.netlify.app/](https://weather-glass.netlify.app/)  
 
 ## Skills
 
