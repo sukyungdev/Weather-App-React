@@ -9,8 +9,7 @@ import ForecastInfo from './Component/ForecastInfo';
 import SearchCity from './Component/SearchCity';
 
 // API_KEY
-// const API_KEY = process.env.REACT_APP_API_KEY;
-const API_KEY = '26838e13d923034d329d7992ddfe3746';
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 function App() {
   // useState
